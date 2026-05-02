@@ -80,7 +80,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .annotator-qa
-          base_url="https://raw.githubusercontent.com/ibrolord/annotate/${ANNOTATOR_QA_SCRIPT_REF}/scripts/qa"
+          base_url="https://raw.githubusercontent.com/ibrolord/annotator-qa-runner/${ANNOTATOR_QA_SCRIPT_REF}/scripts/qa"
           curl -fsSL "$base_url/resolve-report-id.mjs" -o .annotator-qa/resolve-report-id.mjs
           curl -fsSL "$base_url/run-verification.mjs" -o .annotator-qa/run-verification.mjs
           curl -fsSL "$base_url/comment-pr-verification.mjs" -o .annotator-qa/comment-pr-verification.mjs
