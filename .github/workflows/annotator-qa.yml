@@ -112,6 +112,24 @@ jobs:
           esac
           echo "target_url=$target_url" >> "$GITHUB_OUTPUT"
 
+      - name: Wait for public preview to serve this build
+        if: steps.report.outputs.report_found == 'true'
+        env:
+          TARGET_URL: ${{ steps.target.outputs.target_url }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 24); do
+            if curl -fsSL "$TARGET_URL" | grep -q "$EXPECTED_SHA"; then
+              echo "Public preview is serving $EXPECTED_SHA"
+              exit 0
+            fi
+            echo "Waiting for public preview propagation: attempt $attempt/24"
+            sleep 5
+          done
+          echo "::error::Public preview did not serve $EXPECTED_SHA at $TARGET_URL within 120 seconds."
+          exit 1
+
       - name: Run Annotator QA verification
         if: steps.report.outputs.report_found == 'true'
         id: verification
