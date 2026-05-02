@@ -89,6 +89,7 @@ jobs:
           node --check .annotator-qa/comment-pr-verification.mjs
 
       - name: Resolve Annotator report ID
+        if: github.event_name != 'push'
         id: report
         env:
           ANNOTATE_REPORT_ID: ${{ inputs.report_id || '' }}
