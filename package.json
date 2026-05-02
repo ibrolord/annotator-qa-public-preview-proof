@@ -1,0 +1,28 @@
+{
+  "name": "annotator-qa-public-preview-proof",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "type-check": "tsc --noEmit",
+    "test:e2e:broken": "playwright test tests/checkout-broken.spec.ts",
+    "test:e2e:fixed": "playwright test tests/checkout-fixed.spec.ts",
+    "submit:report": "node scripts/submit-widget-report.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
+    "vite": "^6.4.2",
+    "typescript": "^5.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^22.19.17",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1"
+  },
+  "packageManager": "pnpm@9.12.0"
+}
