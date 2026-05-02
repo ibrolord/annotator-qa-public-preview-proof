@@ -1,1 +1,1 @@
-export const checkoutFixed = false;
+export const checkoutFixed = true;
